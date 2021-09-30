@@ -1,40 +1,34 @@
 package br.com.zupacademy.marcio.casadocodigo.controller;
 
-import br.com.zupacademy.marcio.casadocodigo.controller.form.AutorForm;
+import br.com.zupacademy.marcio.casadocodigo.dto.AutorDto;
+import br.com.zupacademy.marcio.casadocodigo.form.AutorForm;
 import br.com.zupacademy.marcio.casadocodigo.modelo.Autor;
-
+import br.com.zupacademy.marcio.casadocodigo.repository.AutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.net.URI;
 
 @RestController
+@RequestMapping("/autores")
 public class AutorController {
 
-    @PersistenceContext
-    private EntityManager manager;
-    @Autowired
-    private ProibeEmailDuplicadoAutorValidator proibeEmailDuplicadoAutorValidator;
+   @Autowired
+   private AutorRepository autorRepository;
 
-    @InitBinder
-    public void init(WebDataBinder binder) {
 
-        binder.addValidators(proibeEmailDuplicadoAutorValidator);
-    }
+   @PostMapping
+   @Transactional
+   public ResponseEntity<AutorDto> cadastrar(@RequestBody @Valid AutorForm form, UriComponentsBuilder uriComponentsBuilder) {
+       Autor autor = form.converter(autorRepository);
+       autorRepository.save(autor);
 
-    @PostMapping(value = "/autores")
-    @Transactional
-    public String cria(@RequestBody @Valid AutorForm request) {
-
-        Autor autor = request.toModel();
-        manager.persist(autor);
-        return autor.toString();
-    }
+       URI uri = uriComponentsBuilder.path("/autores/{id}").buildAndExpand(autor.getId()).toUri();
+       return ResponseEntity.created(uri).body(new AutorDto((autor)));
+   }
 }
