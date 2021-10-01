@@ -33,4 +33,15 @@ public class CategoriaController {
         URI uri = uriComponentsBuilder.path("/categorias/{id}").buildAndExpand(categoria.getId()).toUri();
         return ResponseEntity.created(uri).body(new CategoriaDto(categoria));
     }
+
+//    @PostMapping
+//    @Transactional
+////    public String cadastrar(@RequestBody @Valid CategoriaForm form, UriComponentsBuilder uriComponentsBuilder) {
+//    public String cadastrar(@RequestBody @Valid CategoriaForm form) {
+//
+//        Categoria categoria = form.converter();
+//        categoryRepository.save(categoria);
+//
+//        return categoria.getId().toString();
+//    }
 }

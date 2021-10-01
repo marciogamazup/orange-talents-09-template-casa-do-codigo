@@ -2,8 +2,8 @@ package br.com.zupacademy.marcio.casadocodigo.form;
 
 import br.com.zupacademy.marcio.casadocodigo.modelo.Autor;
 import br.com.zupacademy.marcio.casadocodigo.repository.AutorRepository;
+import br.com.zupacademy.marcio.casadocodigo.validator.UniqueValue;
 
-import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -15,7 +15,7 @@ public class AutorForm {
 
     @NotBlank
     @Email
-    @Column(unique = true)
+    @UniqueValue(domainClass = Autor.class, fieldName = "email")
     private String email;
 
     @NotBlank

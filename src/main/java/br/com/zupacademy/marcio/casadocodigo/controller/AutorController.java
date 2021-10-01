@@ -21,7 +21,6 @@ public class AutorController {
    @Autowired
    private AutorRepository autorRepository;
 
-
    @PostMapping
    @Transactional
    public ResponseEntity<AutorDto> cadastrar(@RequestBody @Valid AutorForm form, UriComponentsBuilder uriComponentsBuilder) {
@@ -31,4 +30,15 @@ public class AutorController {
        URI uri = uriComponentsBuilder.path("/autores/{id}").buildAndExpand(autor.getId()).toUri();
        return ResponseEntity.created(uri).body(new AutorDto((autor)));
    }
+
+//    @PostMapping
+//    @Transactional
+//    public String cadastrar(@RequestBody @Valid AutorForm form) {
+//
+//        Autor autor = form.converter();
+//        autorRepository.save(autor);
+//
+//        return autor.getId().toString();
+//    }
+
 }
