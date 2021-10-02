@@ -23,6 +23,7 @@ public class CategoriaController {
     @Autowired
     private CategoryRepository categoryRepository;
 
+
     @PostMapping
     @Transactional
     public ResponseEntity<CategoriaDto> cadastrar(@RequestBody @Valid CategoriaForm form, UriComponentsBuilder uriComponentsBuilder) {
@@ -30,9 +31,17 @@ public class CategoriaController {
         Categoria categoria = form.converter(categoryRepository);
         categoryRepository.save(categoria);
 
-        URI uri = uriComponentsBuilder.path("/categorias/{id}").buildAndExpand(categoria.getId()).toUri();
-        return ResponseEntity.created(uri).body(new CategoriaDto(categoria));
+        return ResponseEntity.ok(new CategoriaDto(categoria));
+
     }
+
+
+
+
+
+// para ter código de resposta 201 poderia fazer da forma abaixo
+// URI uri = uriComponentsBuilder.path("/categorias/{id}").buildAndExpand(categoria.getId()).toUri();
+// return ResponseEntity.created(uri).body(new CategoriaDto(categoria));
 
 //    @PostMapping
 //    @Transactional

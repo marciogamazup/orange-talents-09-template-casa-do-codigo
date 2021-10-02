@@ -27,8 +27,11 @@ public class AutorController {
        Autor autor = form.converter(autorRepository);
        autorRepository.save(autor);
 
-       URI uri = uriComponentsBuilder.path("/autores/{id}").buildAndExpand(autor.getId()).toUri();
-       return ResponseEntity.created(uri).body(new AutorDto((autor)));
+       return ResponseEntity.ok(new AutorDto((autor)));
+
+       // para ter código de resposta 201 poderia fazer da forma abaixo
+       // URI uri = uriComponentsBuilder.path("/autores/{id}").buildAndExpand(autor.getId()).toUri();
+       //return ResponseEntity.created(uri).body(new AutorDto((autor)));
    }
 
 //    @PostMapping
