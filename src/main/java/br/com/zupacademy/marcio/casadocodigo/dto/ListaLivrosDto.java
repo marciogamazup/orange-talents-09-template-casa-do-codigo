@@ -10,6 +10,7 @@ public class ListaLivrosDto {
     private Integer id;
     private String titulo;
 
+    @Deprecated
     public ListaLivrosDto() {
     }
 

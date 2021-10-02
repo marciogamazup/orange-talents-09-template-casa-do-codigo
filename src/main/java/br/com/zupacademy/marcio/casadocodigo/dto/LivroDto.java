@@ -5,7 +5,6 @@ import br.com.zupacademy.marcio.casadocodigo.modelo.Categoria;
 import br.com.zupacademy.marcio.casadocodigo.modelo.Livro;
 
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,15 +17,15 @@ public class LivroDto {
     private BigDecimal preco;
     private int numeroPaginas;
     private String isbn;
-    private Instant dataDePublicacao;
+    private LocalDate dataDePublicacao;
     private Autor autor;
     private Categoria categoria;
 
     public LivroDto() {
     }
-
     public LivroDto(Livro livro) {
         this.titulo = livro.getTitulo();
+
         this.resumo = livro.getResumo();
         this.sumario = livro.getSumario();
         this.preco = livro.getPreco();
@@ -61,7 +60,7 @@ public class LivroDto {
         return isbn;
     }
 
-    public Instant getDataDePublicacao() {
+    public LocalDate getDataDePublicacao() {
         return dataDePublicacao;
     }
 

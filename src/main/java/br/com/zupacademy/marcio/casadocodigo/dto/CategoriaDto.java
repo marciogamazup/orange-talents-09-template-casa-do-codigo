@@ -9,6 +9,9 @@ public class CategoriaDto {
 
     private String nome;
 
+    @Deprecated
+    public CategoriaDto(){}
+
     public CategoriaDto(Categoria categoria) {
         this.nome = categoria.getNome();
     }

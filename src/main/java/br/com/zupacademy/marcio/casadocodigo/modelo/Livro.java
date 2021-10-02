@@ -2,7 +2,6 @@ package br.com.zupacademy.marcio.casadocodigo.modelo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.NotNull;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
@@ -10,7 +9,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
-import java.time.Instant;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "tb_livro")
@@ -39,8 +38,7 @@ public class Livro {
     @NotNull
     @Future
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Instant dataDePublicacao;
+    private LocalDate dataDePublicacao;
 
 //    @Valid
     @NotNull
@@ -61,7 +59,7 @@ public class Livro {
     public Livro(@NotBlank String titulo, @NotBlank @Size(max = 500) String resumo,
                  @NotBlank String sumario, @NotNull @Min(20) BigDecimal preco,
                  @NotNull @Min(100) int numeroPaginas, @NotBlank String isbn,
-                 @Future @NotNull Instant dataDePublicacao, @NotNull Autor autor,
+                 @Future @NotNull LocalDate dataDePublicacao, @NotNull Autor autor,
                  @NotNull Categoria categoria) {
         this.titulo = titulo;
         this.resumo = resumo;
@@ -102,7 +100,7 @@ public class Livro {
         return isbn;
     }
 
-    public Instant getDataDePublicacao() {
+    public LocalDate getDataDePublicacao() {
         return dataDePublicacao;
     }
 

@@ -1,24 +1,21 @@
 package br.com.zupacademy.marcio.casadocodigo.dto;
 
-
 import br.com.zupacademy.marcio.casadocodigo.modelo.Autor;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AutorDto {
+public class AutorReduzidoDto {
 
     private String nome;
-    private String email;
     private String descricao;
 
     @Deprecated
-    public AutorDto() {
+    public AutorReduzidoDto(){
     }
 
-    public AutorDto(Autor autor) {
+    public AutorReduzidoDto(Autor autor) {
         this.nome = autor.getNome();
-        this.email = autor.getEmail();
         this.descricao = autor.getDescricao();
     }
 
@@ -26,15 +23,7 @@ public class AutorDto {
         return nome;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
     public String getDescricao() {
         return descricao;
-    }
-
-    public static List<AutorDto> converter(List<Autor> autores) {
-        return autores.stream().map(AutorDto::new).collect(Collectors.toList());
     }
 }

@@ -10,13 +10,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.time.LocalDate;
 
 public class LivroForm {
@@ -42,7 +40,7 @@ public class LivroForm {
     @Future
     @JsonFormat(pattern = "dd/MM/yyyy",shape = JsonFormat.Shape.STRING)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    Instant dataDePublicacao;
+    LocalDate dataDePublicacao;
 //    @Valid
     @NotNull
     private Autor autor;
@@ -74,7 +72,7 @@ public class LivroForm {
         return isbn;
     }
 
-    public Instant getDataDePublicacao() {
+    public LocalDate getDataDePublicacao() {
         return dataDePublicacao;
     }
 
